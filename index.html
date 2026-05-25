@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Family Heritage</title>
+<style>
+/* ── Reset & Base ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold:    #C9A227;
+  --gold-lt: #E8D08A;
+  --brown:   #3D2000;
+  --brown-md:#6B3A00;
+  --cream:   #FDF8F0;
+  --cream-dk:#F0E8D8;
+  --blue-lt: #EBF2FF;
+  --rose-lt: #FFEDF3;
+  --gray-lt: #F4F4F4;
+  --text:    #2A1800;
+  --muted:   #7A6040;
+  --border:  #D4C4A0;
+  --shadow:  rgba(0,0,0,0.12);
+  --male:    #D4E8FF;
+  --female:  #FFD4E8;
+  --male-bd: #5580AA;
+  --female-bd:#AA5580;
+  --line:    #A07840;
+}
+html, body { height: 100%; font-family: Georgia, 'Times New Roman', serif; background: var(--cream); color: var(--text); }
+
+/* ── Layout ───────────────────────────────────── */
+#app { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+/* ── Header ───────────────────────────────────── */
+#header {
+  background: var(--brown);
+  color: var(--gold-lt);
+  padding: 0 20px;
+  display: flex; align-items: center; gap: 16px;
+  height: 56px; flex-shrink: 0;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+#header h1 { font-size: 1.3rem; letter-spacing: 0.04em; white-space: nowrap; }
+#header .subtitle { font-size: 0.75rem; color: var(--gold); opacity: 0.8; white-space: nowrap; }
+#search-box {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px; padding: 4px 12px;
+}
+#search-box input {
+  background: none; border: none; outline: none;
+  color: #fff; font-size: 0.9rem; width: 180px;
+}
+#search-box input::placeholder { color: rgba(255,255,255,0.5); }
+#search-box svg { opacity: 0.6; }
+#search-count { font-size: 0.75rem; color: var(--gold); min-width: 40px; }
+
+/* ── Tabs ─────────────────────────────────────── */
+#tabs {
+  background: var(--brown-md);
+  display: flex; gap: 0;
+  flex-shrink: 0;
+}
+.tab-btn {
+  padding: 8px 20px; font-size: 0.85rem; cursor: pointer;
+  color: var(--gold-lt); background: none; border: none;
+  border-bottom: 3px solid transparent;
+  font-family: inherit; letter-spacing: 0.03em;
+  transition: all 0.15s;
+}
+.tab-btn:hover { background: rgba(255,255,255,0.08); }
+.tab-btn.active { border-bottom-color: var(--gold); color: #fff; background: rgba(255,255,255,0.1); }
+
+/* ── Main content ─────────────────────────────── */
+#content { flex: 1; overflow: hidden; position: relative; }
+.tab-panel { display: none; height: 100%; overflow: auto; }
+.tab-panel.active { display: block; }
+
+/* ── Tree Tab ─────────────────────────────────── */
+#tree-panel {
+  overflow: hidden;
+  background: var(--cream);
+}
+#tree-controls {
+  position: absolute; top: 8px; left: 8px; z-index: 10;
+  display: flex; gap: 6px; align-items: center;
+}
+.ctrl-btn {
+  background: white; border: 1px solid var(--border);
+  border-radius: 4px; padding: 4px 10px; cursor: pointer;
+  font-size: 0.8rem; color: var(--brown);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.ctrl-btn:hover { background: var(--cream-dk); }
+#tree-legend {
+  position: absolute; bottom: 12px; left: 12px; z-index: 10;
+  background: white; border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 12px;
+  font-size: 0.72rem; color: var(--muted);
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.legend-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--border); }
+#tree-svg { width: 100%; height: 100%; }
+
+/* ── People Tab ───────────────────────────────── */
+#people-panel { padding: 20px; }
+#people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  padding-top: 4px;
+}
+.person-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px;
+  cursor: pointer; transition: all 0.15s;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+.person-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow); border-color: var(--gold); }
+.person-card.male { border-left: 3px solid var(--male-bd); }
+.person-card.female { border-left: 3px solid var(--female-bd); }
+.pc-name { font-size: 0.95rem; font-weight: bold; color: var(--brown); }
+.pc-dates { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
+.pc-place { font-size: 0.72rem; color: var(--muted); font-style: italic; }
+.pc-charts { font-size: 0.7rem; color: var(--gold); margin-top: 4px; }
+.hidden { display: none !important; }
+
+/* ── Charts Tab ───────────────────────────────── */
+#charts-panel { padding: 20px; }
+#charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+.chart-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden; cursor: pointer;
+  transition: all 0.15s; box-shadow: 0 1px 3px var(--shadow);
+}
+.chart-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow); border-color: var(--gold); }
+.chart-thumb { width: 100%; height: 160px; object-fit: cover; object-position: top; }
+.chart-label { padding: 8px 12px; font-size: 0.78rem; color: var(--brown); }
+.chart-type { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ── Detail Modal ─────────────────────────────── */
+#modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 100; display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+#modal-overlay.open { display: flex; }
+#modal {
+  background: white; border-radius: 12px;
+  max-width: 680px; width: 100%; max-height: 90vh;
+  overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+}
+#modal-header {
+  background: var(--brown); color: var(--gold-lt);
+  padding: 16px 20px; border-radius: 12px 12px 0 0;
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+#modal-name { font-size: 1.25rem; }
+#modal-close {
+  background: none; border: none; color: var(--gold-lt);
+  font-size: 1.4rem; cursor: pointer; padding: 0 4px; line-height: 1;
+}
+#modal-body { padding: 20px; }
+.detail-section { margin-bottom: 16px; }
+.detail-section h3 {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 8px;
+}
+.detail-row { display: flex; gap: 8px; margin: 4px 0; font-size: 0.88rem; }
+.detail-label { color: var(--muted); min-width: 90px; flex-shrink: 0; font-size: 0.82rem; }
+.detail-value { color: var(--text); }
+.family-link {
+  display: inline-block; background: var(--cream-dk);
+  border: 1px solid var(--border); border-radius: 4px;
+  padding: 2px 8px; margin: 2px; font-size: 0.8rem;
+  cursor: pointer; color: var(--brown-md);
+}
+.family-link:hover { background: var(--gold-lt); border-color: var(--gold); }
+#modal-chart-img { width: 100%; border-radius: 6px; margin-top: 8px; border: 1px solid var(--border); }
+
+/* ── Chart Viewer ─────────────────────────────── */
+#chart-viewer {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  z-index: 200; display: none; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px;
+}
+#chart-viewer.open { display: flex; }
+#chart-viewer img { max-width: 95vw; max-height: 90vh; object-fit: contain; border-radius: 4px; }
+#chart-viewer-close {
+  position: absolute; top: 12px; right: 16px;
+  background: none; border: none; color: white; font-size: 2rem; cursor: pointer; line-height: 1;
+}
+#chart-viewer-label { color: var(--gold-lt); font-size: 0.9rem; }
+
+/* ── Tree node styles (SVG foreign objects) ─────── */
+.tree-person {
+  border-radius: 5px; padding: 5px 7px;
+  font-family: Georgia, serif; cursor: pointer;
+  font-size: 11px; line-height: 1.3;
+  border: 1.5px solid;
+  transition: box-shadow 0.1s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tree-person:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+.tree-person.male { background: var(--male); border-color: var(--male-bd); }
+.tree-person.female { background: var(--female); border-color: var(--female-bd); }
+.tree-person.unknown { background: var(--gray-lt); border-color: #999; }
+.tree-person .tp-name { font-weight: bold; color: var(--brown); }
+.tree-person .tp-dates { color: var(--muted); font-size: 9.5px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <!-- Header -->
+  <div id="header">
+    <div>
+      <h1>⚜ Golden Family Heritage</h1>
+      <div class="subtitle">~7 Generations · Louisiana, Texas &amp; Beyond</div>
+    </div>
+    <div id="search-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="search-input" type="text" placeholder="Search name…" oninput="doSearch(this.value)">
+      <span id="search-count"></span>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div id="tabs">
+    <button class="tab-btn active" onclick="switchTab('tree',this)">🌳 Family Tree</button>
+    <button class="tab-btn" onclick="switchTab('people',this)">👤 People</button>
+    <button class="tab-btn" onclick="switchTab('charts',this)">📄 Source Charts</button>
+  </div>
+
+  <!-- Content -->
+  <div id="content">
+    <!-- Tree Panel -->
+    <div id="tree-panel" class="tab-panel active">
+      <div id="tree-controls">
+        <button class="ctrl-btn" onclick="treeZoom(1.3)">＋ Zoom</button>
+        <button class="ctrl-btn" onclick="treeZoom(1/1.3)">－ Zoom</button>
+        <button class="ctrl-btn" onclick="treeFit()">⊡ Fit</button>
+        <select class="ctrl-btn" id="root-select" onchange="rebuildTree()" style="width:200px">
+          <option value="p030">Start from: James Edward Golden</option>
+          <option value="p010">Start from: Albert Golden</option>
+          <option value="p100">Start from: Harold Lee Golden</option>
+          <option value="p102">Start from: Ernest Albert Golden</option>
+          <option value="p106">Start from: Donald Paul Golden Sr.</option>
+          <option value="p210">Start from: Donald Paul Golden Jr.</option>
+        </select>
+      </div>
+      <svg id="tree-svg">
+        <defs>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="var(--line)"/>
+          </marker>
+        </defs>
+        <g id="tree-root"></g>
+      </svg>
+      <div id="tree-legend">
+        <div class="legend-row"><div class="legend-swatch" style="background:var(--male);border-color:var(--male-bd)"></div> Male</div>
+        <div class="legend-row"><div class="legend-swatch" style="background:var(--female);border-color:var(--female-bd)"></div> Female</div>
+        <div class="legend-row"><div class="legend-swatch" style="background:var(--gray-lt);border-color:#999"></div> Unknown</div>
+        <div style="margin-top:4px;color:var(--muted)">Click any person for details</div>
+        <div style="color:var(--muted)">Drag to pan · Scroll to zoom</div>
+      </div>
+    </div>
+
+    <!-- People Panel -->
+    <div id="people-panel" class="tab-panel">
+      <div id="people-grid"></div>
+    </div>
+
+    <!-- Charts Panel -->
+    <div id="charts-panel" class="tab-panel">
+      <div id="charts-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Person Detail Modal -->
+<div id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div id="modal">
+    <div id="modal-header">
+      <div id="modal-name"></div>
+      <button id="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Chart Viewer -->
+<div id="chart-viewer" onclick="closeChartViewer()">
+  <button id="chart-viewer-close" onclick="closeChartViewer()">✕</button>
+  <div id="chart-viewer-label"></div>
+  <img id="chart-viewer-img" src="" alt="Ancestry Chart">
+</div>
+
+<!-- Load data -->
+<script src="data.js"></script>
+
+<script>
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function personName(p) {
+  if (!p) return '(unknown)';
+  let n = [p.first, p.last].filter(Boolean).join(' ');
+  if (p.suffix) n += ' ' + p.suffix;
+  return n || '(unknown)';
+}
+function personDates(p) {
+  let d = '';
+  if (p.birth?.date) d += 'b. ' + p.birth.date;
+  if (p.death?.date) d += (d ? ' · ' : '') + 'd. ' + p.death.date;
+  return d;
+}
+function personPlace(p) {
+  return p.birth?.place || '';
+}
+
+// ── Tab switching ─────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(name + '-panel').classList.add('active');
+  btn.classList.add('active');
+  if (name === 'tree' && !treeBuilt) { buildTree(); treeBuilt = true; }
+}
+
+// ── Search ────────────────────────────────────────────────────────────────────
+function doSearch(q) {
+  q = q.trim().toLowerCase();
+  let cards = document.querySelectorAll('.person-card');
+  let visible = 0;
+  cards.forEach(c => {
+    const matches = !q || c.dataset.name.toLowerCase().includes(q);
+    c.classList.toggle('hidden', !matches);
+    if (matches) visible++;
+  });
+  document.getElementById('search-count').textContent = q ? visible + ' found' : '';
+}
+
+// ── People Panel ──────────────────────────────────────────────────────────────
+function buildPeoplePanel() {
+  const grid = document.getElementById('people-grid');
+  const people = Object.values(PEOPLE).sort((a,b) => {
+    const la = a.last || '', lb = b.last || '';
+    return la.localeCompare(lb) || (a.first||'').localeCompare(b.first||'');
+  });
+  grid.innerHTML = people.map(p => `
+    <div class="person-card ${p.gender==='M'?'male':p.gender==='F'?'female':''}"
+         data-name="${personName(p)}" data-id="${p.id}"
+         onclick="openPersonModal('${p.id}')">
+      <div class="pc-name">${personName(p)}</div>
+      <div class="pc-dates">${personDates(p)}</div>
+      <div class="pc-place">${personPlace(p)}</div>
+      ${p.chartRef?.length ? `<div class="pc-charts">Chart${p.chartRef.length>1?'s':''}: ${p.chartRef.join(', ')}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+// ── Charts Panel ──────────────────────────────────────────────────────────────
+function buildChartsPanel() {
+  const grid = document.getElementById('charts-grid');
+  grid.innerHTML = Object.entries(CHART_INFO).map(([num, info]) => `
+    <div class="chart-card" onclick="openChartViewer(${num})">
+      <img class="chart-thumb" src="charts/chart_${String(num).padStart(2,'0')}.jpg"
+           alt="Chart ${num}" loading="lazy">
+      <div class="chart-label">
+        <div class="chart-type">${info.type === 'pedigree' ? 'Pedigree Chart' : 'Family Group Sheet'} #${num}</div>
+        <div>${info.title}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── Chart Viewer ──────────────────────────────────────────────────────────────
+function openChartViewer(num) {
+  const info = CHART_INFO[num];
+  document.getElementById('chart-viewer-img').src = `charts/chart_${String(num).padStart(2,'0')}.jpg`;
+  document.getElementById('chart-viewer-label').textContent = `Chart ${num} — ${info?.title || ''}`;
+  document.getElementById('chart-viewer').classList.add('open');
+}
+function closeChartViewer() {
+  document.getElementById('chart-viewer').classList.remove('open');
+}
+
+// ── Person Modal ──────────────────────────────────────────────────────────────
+function openPersonModal(pid) {
+  const p = PEOPLE[pid];
+  if (!p) return;
+  document.getElementById('modal-name').textContent = personName(p);
+
+  // Find families
+  const birthFamId = BIRTH_FAMILY[pid];
+  const birthFam = birthFamId ? FAMILIES.find(f => f.id === birthFamId) : null;
+  const spouseFams = (SPOUSE_FAMILIES[pid] || []).map(fid => FAMILIES.find(f => f.id === fid)).filter(Boolean);
+
+  let html = '';
+
+  // Vital info
+  html += '<div class="detail-section"><h3>Vital Records</h3>';
+  if (p.birth?.date || p.birth?.place) {
+    html += `<div class="detail-row"><span class="detail-label">Birth</span><span class="detail-value">${[p.birth.date, p.birth.place].filter(Boolean).join(' — ')}</span></div>`;
+  }
+  if (p.death?.date || p.death?.place) {
+    html += `<div class="detail-row"><span class="detail-label">Death</span><span class="detail-value">${[p.death.date, p.death.place].filter(Boolean).join(' — ')}</span></div>`;
+  }
+  if (p.gender) {
+    html += `<div class="detail-row"><span class="detail-label">Gender</span><span class="detail-value">${p.gender==='M'?'Male':p.gender==='F'?'Female':'Unknown'}</span></div>`;
+  }
+  html += '</div>';
+
+  // Parents
+  if (birthFam) {
+    html += '<div class="detail-section"><h3>Parents</h3>';
+    if (birthFam.husbandId) {
+      const father = PEOPLE[birthFam.husbandId];
+      html += `<div class="detail-row"><span class="detail-label">Father</span><span class="detail-value"><span class="family-link" onclick="openPersonModal('${birthFam.husbandId}')">${personName(father)}</span></span></div>`;
+    }
+    if (birthFam.wifeId) {
+      const mother = PEOPLE[birthFam.wifeId];
+      html += `<div class="detail-row"><span class="detail-label">Mother</span><span class="detail-value"><span class="family-link" onclick="openPersonModal('${birthFam.wifeId}')">${personName(mother)}</span></span></div>`;
+    }
+    html += '</div>';
+  }
+
+  // Marriages & Children
+  spouseFams.forEach((fam, idx) => {
+    const isHusband = fam.husbandId === pid;
+    const spouseId = isHusband ? fam.wifeId : fam.husbandId;
+    const spouse = PEOPLE[spouseId];
+    html += `<div class="detail-section"><h3>Marriage${spouseFams.length > 1 ? ' ' + (idx+1) : ''}</h3>`;
+    if (spouse) {
+      html += `<div class="detail-row"><span class="detail-label">Spouse</span><span class="detail-value"><span class="family-link" onclick="openPersonModal('${spouseId}')">${personName(spouse)}</span></span></div>`;
+    }
+    if (fam.marriage?.date || fam.marriage?.place) {
+      html += `<div class="detail-row"><span class="detail-label">Married</span><span class="detail-value">${[fam.marriage.date, fam.marriage.place].filter(Boolean).join(' — ')}</span></div>`;
+    }
+    if (fam.childIds?.length) {
+      html += `<div class="detail-row"><span class="detail-label">Children</span><span class="detail-value">${
+        fam.childIds.map(cid => {
+          const ch = PEOPLE[cid];
+          return ch ? `<span class="family-link" onclick="openPersonModal('${cid}')">${personName(ch)}</span>` : '';
+        }).filter(Boolean).join(' ')
+      }</span></div>`;
+    }
+    html += '</div>';
+  });
+
+  // Notes
+  if (p.notes) {
+    html += `<div class="detail-section"><h3>Notes</h3><div style="font-size:0.86rem;color:var(--muted)">${p.notes}</div></div>`;
+  }
+
+  // Source Charts
+  if (p.chartRef?.length) {
+    html += '<div class="detail-section"><h3>Source Charts</h3><div>';
+    p.chartRef.forEach(cn => {
+      const info = CHART_INFO[cn];
+      html += `<div style="margin:4px 0"><span class="family-link" onclick="closeModal();openChartViewer(${cn})">📄 Chart ${cn}: ${info?.title || ''}</span></div>`;
+    });
+    html += '</div></div>';
+
+    // Show first chart image preview
+    html += `<div class="detail-section"><h3>Chart Preview</h3>
+      <img id="modal-chart-img" src="charts/chart_${String(p.chartRef[0]).padStart(2,'0')}.jpg"
+           onclick="openChartViewer(${p.chartRef[0]})" style="cursor:zoom-in"
+           alt="Chart ${p.chartRef[0]}">
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:4px">Click to view full size</div>
+    </div>`;
+  }
+
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// ── Family Tree (SVG) ─────────────────────────────────────────────────────────
+let treeBuilt = false;
+let svgTransform = { x: 0, y: 0, scale: 1 };
+const NODE_W = 160, NODE_H = 52, H_GAP = 30, V_GAP = 80;
+
+function buildTree() {
+  const rootId = document.getElementById('root-select').value;
+  renderDescendantTree(rootId);
+}
+function rebuildTree() { buildTree(); }
+
+function renderDescendantTree(rootId) {
+  // Build a hierarchy of families starting from rootId
+  const g = document.getElementById('tree-root');
+  g.innerHTML = '';
+
+  // Collect all descendant families of a person
+  function getDescendantTree(pid, depth=0, maxDepth=6) {
+    if (depth > maxDepth) return null;
+    const spouseFams = (SPOUSE_FAMILIES[pid] || []).map(fid => FAMILIES.find(f => f.id === fid)).filter(Boolean);
+    const families = spouseFams.map(fam => {
+      const spouseId = fam.husbandId === pid ? fam.wifeId : fam.husbandId;
+      const childTrees = fam.childIds.map(cid => getDescendantTree(cid, depth+1, maxDepth)).filter(Boolean);
+      return { fam, spouseId, childTrees, pid };
+    });
+    return { pid, families };
+  }
+
+  const tree = getDescendantTree(rootId);
+  if (!tree) return;
+
+  // Layout
+  const positions = {}; // pid → {x, y}
+  const famPositions = {}; // famId → {x, y} (center of couple)
+  let maxX = 0;
+
+  function layout(node, genY, startX) {
+    // Compute width needed for this subtree
+    function subtreeWidth(n) {
+      if (!n || !n.families.length) return NODE_W + H_GAP;
+      let w = 0;
+      n.families.forEach(fi => {
+        // Couple takes 2 nodes + gap; children spread below
+        let childW = 0;
+        fi.childTrees.forEach(ct => { childW += subtreeWidth(ct); });
+        w += Math.max(2*(NODE_W+H_GAP), childW);
+      });
+      return Math.max(w, NODE_W + H_GAP);
+    }
+
+    const sw = subtreeWidth(node);
+    const cx = startX + sw / 2;
+
+    // Place this person
+    positions[node.pid] = { x: cx - NODE_W/2, y: genY };
+    maxX = Math.max(maxX, cx + NODE_W/2);
+
+    // Place each family
+    let famX = startX;
+    node.families.forEach(fi => {
+      let childW = 0;
+      fi.childTrees.forEach(ct => { childW += subtreeWidth(ct); });
+      const famSW = Math.max(2*(NODE_W+H_GAP), childW);
+      const famCX = famX + famSW/2;
+
+      // Spouse position
+      positions[fi.spouseId] = { x: famCX + H_GAP/2, y: genY };
+
+      // Adjust primary person for this family
+      if (node.families.length > 1) {
+        positions[node.pid] = { x: famCX - NODE_W - H_GAP/2, y: genY };
+      } else {
+        positions[node.pid] = { x: famCX - NODE_W - H_GAP/2, y: genY };
+      }
+
+      famPositions[fi.fam.id] = {
+        x: famCX,
+        y: genY + NODE_H/2,
+        y2: genY + NODE_H + V_GAP/2
+      };
+
+      // Layout children
+      let childX = famX + (famSW - childW) / 2;
+      fi.childTrees.forEach(ct => {
+        const ctw = subtreeWidth(ct);
+        layout(ct, genY + NODE_H + V_GAP, childX);
+        childX += ctw;
+      });
+
+      famX += famSW;
+    });
+  }
+
+  layout(tree, 40, 20);
+
+  const totalH = Math.max(...Object.values(positions).map(p => p.y)) + NODE_H + 40;
+
+  // Draw connecting lines
+  const lines = document.createElementNS('http://www.w3.org/2000/svg','g');
+  lines.setAttribute('id','tree-lines');
+
+  FAMILIES.forEach(fam => {
+    const fp = famPositions[fam.id];
+    if (!fp) return;
+    const hp = positions[fam.husbandId];
+    const wp = positions[fam.wifeId];
+
+    if (hp && wp) {
+      // Couple connector (horizontal line between them)
+      const hRight = hp.x + NODE_W;
+      const wLeft = wp.x;
+      const y = hp.y + NODE_H/2;
+      const midX = (hRight + wLeft) / 2;
+
+      const l = document.createElementNS('http://www.w3.org/2000/svg','line');
+      l.setAttribute('x1', hRight); l.setAttribute('y1', y);
+      l.setAttribute('x2', wLeft);  l.setAttribute('y2', y);
+      l.setAttribute('stroke', 'var(--gold)'); l.setAttribute('stroke-width','2');
+      lines.appendChild(l);
+
+      // Drop line from midpoint to children level
+      if (fam.childIds.length > 0) {
+        const hasChildPos = fam.childIds.some(cid => positions[cid]);
+        if (hasChildPos) {
+          const dropY = fp.y2;
+          const vLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+          vLine.setAttribute('x1', fp.x); vLine.setAttribute('y1', y);
+          vLine.setAttribute('x2', fp.x); vLine.setAttribute('y2', dropY);
+          vLine.setAttribute('stroke','var(--line)'); vLine.setAttribute('stroke-width','1.5');
+          lines.appendChild(vLine);
+
+          // Horizontal bar across children
+          const childXs = fam.childIds.map(cid => positions[cid]).filter(Boolean).map(p => p.x + NODE_W/2);
+          if (childXs.length > 1) {
+            const hBar = document.createElementNS('http://www.w3.org/2000/svg','line');
+            hBar.setAttribute('x1', Math.min(...childXs)); hBar.setAttribute('y1', dropY);
+            hBar.setAttribute('x2', Math.max(...childXs)); hBar.setAttribute('y2', dropY);
+            hBar.setAttribute('stroke','var(--line)'); hBar.setAttribute('stroke-width','1.5');
+            lines.appendChild(hBar);
+          }
+
+          // Drop to each child
+          fam.childIds.forEach(cid => {
+            const cp = positions[cid];
+            if (!cp) return;
+            const cl = document.createElementNS('http://www.w3.org/2000/svg','line');
+            cl.setAttribute('x1', cp.x + NODE_W/2); cl.setAttribute('y1', dropY);
+            cl.setAttribute('x2', cp.x + NODE_W/2); cl.setAttribute('y2', cp.y);
+            cl.setAttribute('stroke','var(--line)'); cl.setAttribute('stroke-width','1.5');
+            lines.appendChild(cl);
+          });
+        }
+      }
+    }
+  });
+
+  g.appendChild(lines);
+
+  // Draw person nodes
+  Object.entries(positions).forEach(([pid, pos]) => {
+    const p = PEOPLE[pid];
+    if (!p) return;
+    const fo = document.createElementNS('http://www.w3.org/2000/svg','foreignObject');
+    fo.setAttribute('x', pos.x); fo.setAttribute('y', pos.y);
+    fo.setAttribute('width', NODE_W); fo.setAttribute('height', NODE_H);
+    fo.setAttribute('data-pid', pid);
+
+    const div = document.createElement('div');
+    div.className = `tree-person ${p.gender==='M'?'male':p.gender==='F'?'female':'unknown'}`;
+    div.style.width = NODE_W + 'px';
+    div.style.height = NODE_H + 'px';
+    div.onclick = () => openPersonModal(pid);
+    div.innerHTML = `<div class="tp-name">${personName(p)}</div><div class="tp-dates">${personDates(p)}</div>`;
+    div.title = personName(p) + (personPlace(p) ? '\n' + personPlace(p) : '');
+
+    fo.appendChild(div);
+    g.appendChild(fo);
+  });
+
+  // Set SVG viewBox
+  const svg = document.getElementById('tree-svg');
+  svgTransform = { x: 0, y: 0, scale: 1 };
+  applyTransform();
+
+  // Make SVG pannable/zoomable
+  setupPanZoom(svg);
+}
+
+// ── Pan & Zoom ────────────────────────────────────────────────────────────────
+let isDragging = false, dragStart = {x:0,y:0}, transformStart = {x:0,y:0};
+
+function applyTransform() {
+  const g = document.getElementById('tree-root');
+  g.setAttribute('transform', `translate(${svgTransform.x},${svgTransform.y}) scale(${svgTransform.scale})`);
+}
+
+function treeZoom(factor) {
+  svgTransform.scale *= factor;
+  svgTransform.scale = Math.max(0.15, Math.min(3, svgTransform.scale));
+  applyTransform();
+}
+
+function treeFit() {
+  const svg = document.getElementById('tree-svg');
+  const g = document.getElementById('tree-root');
+  if (!g.children.length) return;
+  const bbox = g.getBBox();
+  const svgW = svg.clientWidth || 800;
+  const svgH = svg.clientHeight || 600;
+  const scaleX = svgW / (bbox.width + 60);
+  const scaleY = svgH / (bbox.height + 60);
+  const scale = Math.min(scaleX, scaleY, 1);
+  svgTransform.scale = scale;
+  svgTransform.x = (svgW - bbox.width * scale) / 2 - bbox.x * scale;
+  svgTransform.y = 20;
+  applyTransform();
+}
+
+function setupPanZoom(svg) {
+  svg.onmousedown = e => {
+    if (e.button !== 0) return;
+    isDragging = true;
+    dragStart = {x: e.clientX, y: e.clientY};
+    transformStart = {x: svgTransform.x, y: svgTransform.y};
+  };
+  svg.onmousemove = e => {
+    if (!isDragging) return;
+    svgTransform.x = transformStart.x + (e.clientX - dragStart.x);
+    svgTransform.y = transformStart.y + (e.clientY - dragStart.y);
+    applyTransform();
+  };
+  svg.onmouseup = svg.onmouseleave = () => { isDragging = false; };
+  svg.onwheel = e => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.12 : 1/1.12;
+    const rect = svg.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    svgTransform.x = mx - (mx - svgTransform.x) * factor;
+    svgTransform.y = my - (my - svgTransform.y) * factor;
+    svgTransform.scale = Math.max(0.15, Math.min(3, svgTransform.scale * factor));
+    applyTransform();
+  };
+}
+
+// ── Keyboard shortcuts ────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeChartViewer(); }
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+buildPeoplePanel();
+buildChartsPanel();
+buildTree();
+treeBuilt = true;
+
+// Auto-fit tree after a short delay (DOM needs to settle)
+setTimeout(treeFit, 300);
+</script>
+</body>
+</html>
