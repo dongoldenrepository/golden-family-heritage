@@ -406,9 +406,9 @@ const PEOPLE = {
   "p403": { id:"p403", first:"Shannon", last:"Vaes", gender:"F",
             birth:{date:"c.10/21/1981"}, death:{}, chartRef:[38],
             notes:"Daughter of Thomas James Vaes Jr. + Vicky Layne Viguet" },
-  "p404": { id:"p404", first:"Sarah-Nicole", last:"Webb", gender:"F",
+  "p404": { id:"p404", first:"Taylor Lucas", last:"Mershon", gender:"F",
             birth:{date:"c.1991"}, death:{}, chartRef:[39],
-            notes:"Daughter of Glenn Webb + Britany Carin Golden" },
+            notes:"Daughter of Glenn Webb + Britany Carin Golden. Born Sarah-Nicole Webb; name changed to Taylor Lucas Barrett c.Sep 2019; became Taylor Lucas Mershon upon marriage Sep 2020." },
 
   // ── Children of Glenn Webb + Britany Carin Golden (additional) ──
   "p408": { id:"p408", first:"Hannah Nicole", last:"Sanders", gender:"F",
@@ -417,9 +417,9 @@ const PEOPLE = {
   "p409": { id:"p409", first:"Joshua Michael", last:"Webb", gender:"M",
             birth:{date:"2/14/1998", place:"Alice Springs, Australia"}, death:{}, chartRef:[39],
             notes:"Son of Glenn Webb + Britany Carin Golden" },
-  "p410": { id:"p410", first:"Deborah Erin", last:"Webb", gender:"F",
+  "p410": { id:"p410", first:"Deborah Erin", last:"Webb Shultz", gender:"F",
             birth:{date:"2/13/2000", place:"Alice Springs, Australia"}, death:{}, chartRef:[39],
-            notes:"Daughter of Glenn Webb + Britany Carin Golden" },
+            notes:"Daughter of Glenn Webb + Britany Carin Golden; married name Webb Shultz" },
   "p411": { id:"p411", first:"Noah James", last:"Webb", gender:"M",
             birth:{date:"12/13/2004", place:"Colorado Springs, CO"}, death:{}, chartRef:[39],
             notes:"Son of Glenn Webb + Britany Carin Golden" },
@@ -429,6 +429,25 @@ const PEOPLE = {
   "p413": { id:"p413", first:"Rebekah Minnie", last:"Webb", gender:"F",
             birth:{date:"1/7/2010", place:"Colorado Springs, CO"}, death:{}, chartRef:[39],
             notes:"Daughter of Glenn Webb + Britany Carin Golden" },
+
+  // ── Spouse of Deborah Erin Webb Shultz ──
+  "p414": { id:"p414", first:"Colt Edward", last:"Shultz", gender:"M",
+            birth:{date:"8/9/1999", place:"Fontana, CA"}, death:{},
+            notes:"Husband of Deborah Erin Webb Shultz" },
+
+  // ── Spouses/children of Taylor Lucas Mershon (formerly Sarah-Nicole Webb) ──
+  "p415": { id:"p415", first:"Ezequiel Ruben", last:"Dominguez", suffix:"III", gender:"M",
+            birth:{}, death:{},
+            notes:"First husband of Taylor Lucas Mershon (then Sarah-Nicole Webb). Married Dec 29, 2011; divorced Aug 28, 2019." },
+  "p416": { id:"p416", first:"Sadie", last:"Dominguez", gender:"F",
+            birth:{date:"8/3/2012"}, death:{},
+            notes:"Daughter of Ezequiel Ruben Dominguez III + Taylor Lucas Mershon (then Sarah-Nicole Webb)" },
+  "p417": { id:"p417", first:"Brooks", last:"Mershon", gender:"M",
+            birth:{}, death:{},
+            notes:"Second husband of Taylor Lucas Mershon. Married Sep 22, 2020." },
+  "p418": { id:"p418", first:"Malcolm Brooks", last:"Mershon", gender:"M",
+            birth:{date:"2/1/2023"}, death:{},
+            notes:"Son of Brooks Mershon + Taylor Lucas Mershon" },
 
   // ── Spouse of Patrick Scott Golden ──
   "p405": { id:"p405", first:"Stefanie", last:"Garza", gender:"F",
@@ -718,6 +737,18 @@ const FAMILIES = [
     marriage:{},
     childIds:["p406","p407"],
     notes:"Patrick Scott Golden + Stefanie Garza" },
+  { id:"f064", husbandId:"p414", wifeId:"p410",
+    marriage:{date:"9/24/2018"},
+    childIds:[],
+    notes:"Colt Edward Shultz + Deborah Erin Webb Shultz" },
+  { id:"f065", husbandId:"p415", wifeId:"p404",
+    marriage:{date:"12/29/2011"}, divorce:{date:"8/28/2019"},
+    childIds:["p416"],
+    notes:"Ezequiel Ruben Dominguez III + Taylor Lucas Mershon (then Sarah-Nicole Webb)" },
+  { id:"f066", husbandId:"p417", wifeId:"p404",
+    marriage:{date:"9/22/2020"},
+    childIds:["p418"],
+    notes:"Brooks Mershon + Taylor Lucas Mershon" },
 ];
 
 // Build lookup: personId → family they belong to as a child
