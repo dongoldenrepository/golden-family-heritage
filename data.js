@@ -5,7 +5,7 @@
 const PEOPLE = {
   // ── GENERATION 0 (Parents of oldest confirmed ancestors) ──────────────────
   "p001": { id:"p001", first:"Jean", last:"Johnson", gender:"M", birth:{}, death:{}, notes:"Father of Benoit Johnson" },
-  "p002": { id:"p002", first:"Marceline", last:"McLean", gender:"F", birth:{}, death:{}, notes:"Mother of Benoit Johnson" },
+  "p002": { id:"p002", first:"Marceline", last:"Majeaux", gender:"F", birth:{}, death:{}, notes:"Mother of Benoit Johnson. Surname was misread as McLean in original OCR." },
   "p003": { id:"p003", first:"Dave", last:"Clack", gender:"M", birth:{}, death:{}, notes:"Father of Louise Clack (chart 22)" },
   "p004": { id:"p004", first:"Mela", last:"Hebert", gender:"F", birth:{}, death:{}, notes:"Mother of Louise Clack (chart 22)" },
 
@@ -54,12 +54,12 @@ const PEOPLE = {
             marriage:{date:"9/30/1911", place:"Lake Charles, LA"},
             chartRef:[12], notes:"Father: Albert Golden; Mother: Ella Littleton" },
   "p031": { id:"p031", first:"Beatrice Rebecca", last:"Banks", gender:"F",
-            birth:{date:"4/1/1883", place:"[Lake Charles area], LA"},
-            death:{date:"11/8/1944", place:"Kountze, TX (Old Hardin City Cemetery)"},
+            birth:{date:"12/1/1895", place:"Bunkie, LA"},
+            death:{date:"1/18/1949", place:"Kountze, TX (Old Hardin City Cemetery)"},
             chartRef:[12], notes:"Church: Episcopal. Daughter of Robert E. Lee Herman Banks + Alice Johnson" },
   "p032": { id:"p032", first:"Robert E. Lee Herman", last:"Banks", gender:"M",
-            birth:{date:"7/21/1866", place:"Rapides Parish, LA"},
-            death:{date:"[c.1932]", place:"Forest Hill, LA (Butler Cemetery)"},
+            birth:{date:"7/28/1866", place:"Rapides Parish, LA"},
+            death:{date:"[12/1/1952]", place:"Forest Hill, LA (Butler Cemetery)"},
             chartRef:[15,23], notes:"Father: Charles Frederick Banks; Mother: Celestine Aymond" },
   "p033": { id:"p033", first:"Alice", last:"Johnson", gender:"F",
             birth:{date:"10/11/1874", place:"Rapides Parish, LA"},
@@ -73,13 +73,13 @@ const PEOPLE = {
             birth:{date:"c.7/16/1836", place:"[Rapides Parish, LA]"},
             death:{date:"c.11/1943", place:"Beaumont, TX"},
             chartRef:[13,20], notes:"Daughter of Edward M. White + Nancy Ann Hall" },
-  "p036": { id:"p036", first:"Aby Luther", last:"Barrett", gender:"M",
-            birth:{date:"c.4/11/1904", place:"[Louisiana]"},
-            death:{date:"c.11/17/1927", place:"Beaumont, TX (Forest Lawn Cemetery)"},
+  "p036": { id:"p036", first:"Arby Luther", last:"Barrett", gender:"M",
+            birth:{date:"b.3/7/1894", place:"Grant Parish Louisiana"},
+            death:{date:"4/6/1977", place:"Beaumont, TX (Forest Lawn Cemetery)"},
             chartRef:[11,13], notes:"Son of Henry Benson Barrett + Elizabeth Jane White" },
   "p037": { id:"p037", first:"Nora Lee", last:"Brown", gender:"F",
-            birth:{date:"c.4/12/1905", place:"Many, LA (Sabine Parish)"},
-            death:{date:"c.4/4/1936", place:"Beaumont, TX (Forest Lawn Cemetery)"},
+            birth:{date:"12/1/1905", place:"Many, LA "},
+            death:{date:"11/6/1976", place:"Beaumont, TX (Forest Lawn Cemetery)"},
             chartRef:[11,18], notes:"Daughter of William Joseph Brown + Berta Lou Mildred Evans" },
   "p038": { id:"p038", first:"Frances (Fannie)", last:"Golden", gender:"F",
             birth:{}, death:{}, chartRef:[16], notes:"Daughter of Albert Golden + Ella Littleton" },
@@ -91,7 +91,7 @@ const PEOPLE = {
             birth:{}, death:{}, chartRef:[17], notes:"Husband of Kitty Golden" },
 
   // Banks siblings (from chart 15)
-  "p042": { id:"p042", first:"[Louisianafarrel]", last:"Banks", gender:"F",
+  "p042": { id:"p042", first:"[Louisiana Frances]", last:"Banks", gender:"F",
             birth:{}, death:{}, chartRef:[23], notes:"Daughter of Charles Frederick Banks + Celestine Aymond" },
   "p043": { id:"p043", first:"Mary", last:"Banks", gender:"F",
             birth:{}, death:{}, chartRef:[23], notes:"Daughter of Charles Frederick Banks + Celestine Aymond" },
@@ -167,13 +167,13 @@ const PEOPLE = {
             birth:{date:"c.4/4/1925", place:"Graveton, TX"},
             death:{}, chartRef:[9], notes:"Husband of Hazel Ella Alice Golden" },
   "p106": { id:"p106", first:"Donald Paul", last:"Golden", suffix:"Sr.", gender:"M",
-            birth:{date:"c.1924", place:"[Louisiana]"},
+            birth:{date:"c.1924", place:"Graybow, Louisiana"},
             death:{},
             marriage:{date:"c.7/1/1962", place:"Beaumont, TX"},
             chartRef:[6,12], notes:"Son of James Edward Golden + Beatrice Rebecca Banks" },
   "p107": { id:"p107", first:"Edith Elnora", last:"Barrett", gender:"F",
-            birth:{date:"c.2/1/1931", place:"Beaumont, TX (Jeff Co.)"},
-            death:{}, chartRef:[6,11], notes:"Daughter of Aby Luther Barrett + Nora Lee Brown" },
+            birth:{date:"4/1/1923", place:"Beaumont, TX (Jeff Co.)"},
+            death:{date:"7/12/2002"}, chartRef:[6,11], notes:"Daughter of Arby Luther Barrett + Nora Lee Brown" },
   "p108": { id:"p108", first:"Lois Inez", last:"Golden", gender:"F",
             birth:{date:"c.11/27/1918"},
             death:{},
@@ -185,18 +185,18 @@ const PEOPLE = {
             birth:{date:"c.4/6/1939", place:"[Kountze, TX area]"},
             death:{}, chartRef:[12], notes:"Son of James Edward Golden + Beatrice Rebecca Banks" },
   "p111": { id:"p111", first:"Helen Faye", last:"Barrett", gender:"F",
-            birth:{date:"c.4/15/1944", place:"Oakdale, LA"},
-            death:{}, chartRef:[11,27], notes:"Daughter of Aby Luther Barrett + Nora Lee Brown" },
+            birth:{date:"4/15/1927", place:"Oakdale, LA"},
+            death:{date:"8/8/2018"}, chartRef:[11,27], notes:"Daughter of Aby Luther Barrett + Nora Lee Brown" },
   "p112": { id:"p112", first:"Gordon Evans", last:"Thomas", gender:"M",
-            birth:{date:"c.4/15/1943", place:"[Fort Payne area, FL]"},
+            birth:{date:"12/5/1923", place:"[Fort Payne area, FL]"},
             death:{},
-            marriage:{date:"c.2/3/1963", place:"Beaumont, TX (Jeff Co.)"},
+            marriage:{date:"3/17/1946", place:"Beaumont, TX (Jeff Co.)"},
             chartRef:[27], notes:"Church: Baptist. Father: [?] Stintons Sr." },
 
   // Babin children (from chart 16)
-  "p113": { id:"p113", first:"[Bookie]", last:"Babin", gender:"U", birth:{}, death:{}, chartRef:[16] },
+  "p113": { id:"p113", first:"Tennie", last:"Babin", gender:"U", birth:{}, death:{}, chartRef:[16] },
   "p114": { id:"p114", first:"Roy", last:"Babin", gender:"M", birth:{}, death:{}, chartRef:[16] },
-  "p115": { id:"p115", first:"Paul", last:"Babin", gender:"M", birth:{}, death:{}, chartRef:[16] },
+  "p115": { id:"p115", first:"Ray", last:"Babin", gender:"M", birth:{}, death:{}, chartRef:[16] },
   "p116": { id:"p116", first:"Grace", last:"Babin", gender:"F", birth:{}, death:{}, chartRef:[16] },
   "p117": { id:"p117", first:"Lucille", last:"Babin", gender:"F", birth:{}, death:{}, chartRef:[16] },
 
@@ -253,27 +253,27 @@ const PEOPLE = {
   "p209": { id:"p209", first:"Mary Lyna", last:"Lewery", gender:"F",
             birth:{date:"c.5/5/1953"}, death:{}, chartRef:[33], notes:"Wife of Barry James Golden" },
   "p210": { id:"p210", first:"Donald Paul", last:"Golden", suffix:"Jr.", gender:"M",
-            birth:{date:"c.3/1946", place:"Beaumont, TX (Jeff Co.)"},
+            birth:{date:"b.3/25/1946", place:"Beaumont, TX (Jeff Co.)"},
             death:{},
-            marriage:{date:"c.4/28/1967", place:"Houston, TX (Harris Co.)"},
+            marriage:{date:"b.11/23/1967", place:"Houston, TX (Harris Co.)"},
             chartRef:[6,24], notes:"Son of Donald Paul Golden Sr. + Edith Elnora Barrett. Occupation: Westinghouse/EMF" },
   "p211": { id:"p211", first:"Kathy Monfort", last:"Lucas", gender:"F",
-            birth:{date:"c.3/15/1945", place:"Long Island, NY"},
+            birth:{date:"b.3/13/1948", place:"Long Island, NY"},
             death:{}, chartRef:[24], notes:"Wife of Donald Paul Golden Jr." },
-  "p212": { id:"p212", first:"Jerry Gene", last:"Golden", gender:"M",
+  "p212": { id:"p212", first:"Terry Gene", last:"Golden", gender:"M",
             birth:{date:"6/7/1952", place:"Beaumont, TX (Jeff Co.)"},
             death:{},
-            marriage:{date:"c.9/14/1973", place:"Beaumont, TX"},
+            marriage:{date:"b.6/29/1974", place:"Beaumont, TX"},
             chartRef:[6,25], notes:"Son of Donald Paul Golden Sr. + Edith Elnora Barrett. Church: Nazarene" },
-  "p213": { id:"p213", first:"Lynnedie Jeane", last:"Brookins", gender:"F",
-            birth:{date:"c.4/21/1951", place:"San Antonio, TX"},
-            death:{}, chartRef:[25], notes:"Wife of Jerry Gene Golden. Church: Nazarene" },
+  "p213": { id:"p213", first:"Lynnette Jeane", last:"Brookins", gender:"F",
+            birth:{date:"b.7/22/1956", place:"San Antonio, TX"},
+            death:{}, chartRef:[25], notes:"Wife of Terry Gene Golden. Church: Baptist" },
   "p214": { id:"p214", first:"Janice Lee", last:"Golden", gender:"F",
-            birth:{date:"c.4/2/1955", place:"Beaumont, TX"},
+            birth:{date:"b.1/26/1958", place:"Beaumont, TX"},
             death:{},
-            marriage:{date:"c.11/1969", place:"Richmond, TX (Fort Bend Co.)"},
+            marriage:{date:"23.11/1969", place:"Richmond, TX (Fort Bend Co.)"},
             chartRef:[6,26], notes:"Daughter of Donald Paul Golden Sr. + Edith Elnora Barrett" },
-  "p215": { id:"p215", first:"Phillip Sand", last:"Holset", suffix:"II", gender:"M",
+  "p215": { id:"p215", first:"Phillip Sand", last:"Hansel", suffix:"II", gender:"M",
             birth:{date:"c.4/1/1959", place:"Richmond, [VA or TX]"},
             death:{}, chartRef:[26], notes:"Husband of Janice Lee Golden" },
   "p216": { id:"p216", first:"Randall Golden", last:"Morgan", gender:"M",
@@ -304,14 +304,14 @@ const PEOPLE = {
             birth:{date:"c.4/4/1948", place:"Beaumont, TX"},
             death:{}, chartRef:[29], notes:"Wife of Steven Gregory Thomas" },
   "p224": { id:"p224", first:"Patricia Ann", last:"Thomas", gender:"F",
-            birth:{date:"c.4/15/1953", place:"Beaumont, TX (Jeff Co.)"},
-            death:{}, chartRef:[27,30],
+            birth:{date:"3/14/58", place:"Beaumont, TX (Jeff Co.)"},
+            death:{date:"10/10/2016"}, chartRef:[27,30],
             notes:"Daughter of Gordon Evans Thomas + Helen Faye Barrett" },
-  "p225": { id:"p225", first:"Carlton David", last:"[Chitty?]", gender:"M",
+  "p225": { id:"p225", first:"Carlton David", last:"Cherry", gender:"M",
             birth:{}, death:{}, chartRef:[30],
-            notes:"Husband of Patricia Ann Thomas; surname unclear in chart" },
+            notes:"Husband of Patricia Ann Thomas" },
   "p226": { id:"p226", first:"Linda Faye", last:"Thomas", gender:"F",
-            birth:{}, death:{}, chartRef:[27], notes:"Daughter of Gordon Evans Thomas + Helen Faye Barrett" },
+            birth:{date:"12/28/1946"}, death:{date:"7/14/2025"}, chartRef:[27], notes:"Daughter of Gordon Evans Thomas + Helen Faye Barrett" },
 
   // ── GENERATION 5 ──────────────────────────────────────────────────────────
   "p300": { id:"p300", first:"Kim", last:"Brown", gender:"F",
@@ -344,7 +344,7 @@ const PEOPLE = {
             death:{},
             marriage:{date:"c.7/2/1988", place:"Nacogdoches, TX"},
             chartRef:[24,39], notes:"Daughter of Donald Paul Golden Jr. + Kathy Monfort Lucas" },
-  "p310": { id:"p310", first:"[?]", last:"Webb", gender:"M",
+  "p310": { id:"p310", first:"Glenn", last:"Webb", gender:"M",
             birth:{date:"c.4/11/1963", place:"[Fredonia, TX]"},
             death:{}, chartRef:[39],
             notes:"Husband of Britany Carin Golden. Church: Church of Christ" },
@@ -388,10 +388,10 @@ const PEOPLE = {
             death:{}, chartRef:[29], notes:"Son of Steven Gregory Thomas + Gladys Ann Golden" },
   "p325": { id:"p325", first:"Joshua David", last:"[?]", gender:"M",
             birth:{date:"c.7/31/1993", place:"Beaumont, TX (Jeff Co.)"},
-            death:{}, chartRef:[30], notes:"Son of Carlton David [?] + Patricia Ann Thomas" },
+            death:{}, chartRef:[30], notes:"Son of Carlton David [Cherry + Patricia Ann Thomas" },
   "p326": { id:"p326", first:"Julee Ann", last:"[?]", gender:"F",
             birth:{date:"c.2003", place:"Beaumont, TX (Jeff Co.)"},
-            death:{}, chartRef:[30], notes:"Daughter of Carlton David [?] + Patricia Ann Thomas" },
+            death:{}, chartRef:[30], notes:"Daughter of Carlton David Cherry + Patricia Ann Thomas" },
 
   // ── GENERATION 6 ──────────────────────────────────────────────────────────
   "p400": { id:"p400", first:"Kristen", last:"Giglio", gender:"F",
@@ -408,7 +408,124 @@ const PEOPLE = {
             notes:"Daughter of Thomas James Vaes Jr. + Vicky Layne Viguet" },
   "p404": { id:"p404", first:"Sarah-Nicole", last:"Webb", gender:"F",
             birth:{date:"c.1991"}, death:{}, chartRef:[39],
-            notes:"Daughter of [?] Webb + Britany Carin Golden" },
+            notes:"Daughter of Glenn Webb + Britany Carin Golden" },
+
+  // ── Children of Glenn Webb + Britany Carin Golden (additional) ──
+  "p408": { id:"p408", first:"Hannah Nicole", last:"Sanders", gender:"F",
+            birth:{date:"10/2/1994"}, death:{}, chartRef:[39],
+            notes:"Daughter of Glenn Webb + Britany Carin Golden; married name Sanders. More info to come." },
+  "p409": { id:"p409", first:"Joshua Michael", last:"Webb", gender:"M",
+            birth:{date:"2/14/1998", place:"Alice Springs, Australia"}, death:{}, chartRef:[39],
+            notes:"Son of Glenn Webb + Britany Carin Golden" },
+  "p410": { id:"p410", first:"Deborah Erin", last:"Webb", gender:"F",
+            birth:{date:"2/13/2000", place:"Alice Springs, Australia"}, death:{}, chartRef:[39],
+            notes:"Daughter of Glenn Webb + Britany Carin Golden" },
+  "p411": { id:"p411", first:"Noah James", last:"Webb", gender:"M",
+            birth:{date:"12/13/2004", place:"Colorado Springs, CO"}, death:{}, chartRef:[39],
+            notes:"Son of Glenn Webb + Britany Carin Golden" },
+  "p412": { id:"p412", first:"Leah Grace", last:"Webb", gender:"F",
+            birth:{date:"6/15/2006", place:"Colorado Springs, CO"}, death:{}, chartRef:[39],
+            notes:"Daughter of Glenn Webb + Britany Carin Golden" },
+  "p413": { id:"p413", first:"Rebekah Minnie", last:"Webb", gender:"F",
+            birth:{date:"1/7/2010", place:"Colorado Springs, CO"}, death:{}, chartRef:[39],
+            notes:"Daughter of Glenn Webb + Britany Carin Golden" },
+
+  // ── Spouse of Patrick Scott Golden ──
+  "p405": { id:"p405", first:"Stefanie", last:"Garza", gender:"F",
+            birth:{date:"9/3/1973"}, death:{},
+            notes:"Wife of Patrick Scott Golden" },
+
+  // ── Children of Patrick Scott Golden + Stefanie Garza ──
+  "p406": { id:"p406", first:"Jonathan", last:"Golden", gender:"M",
+            birth:{date:"7/29/1993"}, death:{},
+            notes:"Son of Stefanie Garza; biological father unknown. Adopted by Patrick Scott Golden." },
+  "p407": { id:"p407", first:"Julian", last:"Golden", gender:"M",
+            birth:{date:"4/7/1996"}, death:{},
+            notes:"Son of Patrick Scott Golden + Stefanie Garza" },
+
+  // ── DEEP ANCESTRY — Johnson / Majeaux / Teffison / Firman / Prevost / Bordelon lines ──
+  // Source: Pedigree Charts 1–4 (Ancestor Charts No. 2–5)
+  // Uncertain readings are in [brackets]. All birth/death dates unknown unless noted.
+
+  // Parents of Jean Johnson (p001) — chart 1 positions 4 & 5
+  "p500": { id:"p500", first:"Charles", last:"Johnson", suffix:"III", gender:"M",
+            birth:{}, death:{}, chartRef:[1], notes:"Father of Jean Johnson (p001). Chart 1 pos. 4." },
+  "p501": { id:"p501", first:"Helene", last:"Teffison", gender:"F",
+            birth:{}, death:{}, chartRef:[1], notes:"Mother of Jean Johnson (p001). Chart 1 pos. 5." },
+
+  // Parents of Marceline Majeaux (p002) — chart 1 positions 6 & 7
+  "p502": { id:"p502", first:"Narcisse", last:"Majeaux", gender:"M",
+            birth:{}, death:{}, chartRef:[1], notes:"Father of Marceline Majeaux (p002). Chart 1 pos. 6." },
+  "p503": { id:"p503", first:"Adelaide", last:"Firman", gender:"F",
+            birth:{}, death:{}, chartRef:[1], notes:"Mother of Marceline Majeaux (p002). Chart 1 pos. 7. Surname may be Erman." },
+
+  // Parents of Charles Johnson III (p500) — chart 1 positions 8 & 9
+  "p504": { id:"p504", first:"Charles", last:"Johnson", suffix:"II", gender:"M",
+            birth:{}, death:{}, chartRef:[1], notes:"Father of Charles Johnson III (p500). Chart 1 pos. 8." },
+
+  // Parents of Helene Teffison (p501) — chart 1 positions 10 & 11
+  "p506": { id:"p506", first:"Hypolite", last:"Teffison", gender:"M",
+            birth:{}, death:{}, chartRef:[1], notes:"Father of Helene Teffison (p501). Chart 1 pos. 10." },
+  "p507": { id:"p507", first:"[Mariette]", last:"Majeaux", gender:"F",
+            birth:{}, death:{}, chartRef:[1], notes:"Mother of Helene Teffison (p501). Chart 1 pos. 11. Name uncertain." },
+
+  // Parents of Narcisse Majeaux (p502) — chart 1 positions 12 & 13
+  // Position 13 (mother of Narcisse) was unnamed on chart 1; her parents (positions 26–27) were Nicolas + Adrienne Bordelon
+  "p508": { id:"p508", first:"Jean Pierre", last:"Majeaux", gender:"M",
+            birth:{}, death:{}, chartRef:[1,3], notes:"Father of Narcisse Majeaux (p502). Chart 1 pos. 12. Ancestry continued on chart 3." },
+  "p520": { id:"p520", first:"[?]", last:"Bordelon", gender:"F",
+            birth:{}, death:{}, chartRef:[1], notes:"Mother of Narcisse Majeaux (p502). Name not recorded on chart 1 (pos. 13). Daughter of Nicolas Bordelon (p521) + Adrienne Bordelon (p522)." },
+
+  // Parents of Adelaide Firman (p503) — chart 1 positions 14 & 15
+  "p509": { id:"p509", first:"Joseph", last:"Firman", gender:"M",
+            birth:{}, death:{}, chartRef:[1], notes:"Father of Adelaide Firman (p503). Chart 1 pos. 14. Surname may be Erman." },
+  "p510": { id:"p510", first:"[Juliette]", last:"Troscuy", gender:"F",
+            birth:{}, death:{}, chartRef:[1], notes:"Mother of Adelaide Firman (p503). Chart 1 pos. 15. First name uncertain." },
+
+  // Father of Charles Johnson II (p504) — chart 1 position 16
+  "p511": { id:"p511", first:"Charles Basseau", last:"Johnson", gender:"M",
+            birth:{}, death:{}, chartRef:[1], notes:"Father of Charles Johnson II (p504). Chart 1 pos. 16. Middle name uncertain." },
+
+  // Father of Hypolite Teffison (p506) — chart 1 position 20
+  "p512": { id:"p512", first:"[Tosa]", last:"Teffison", gender:"M",
+            birth:{}, death:{}, chartRef:[1], notes:"Father of Hypolite Teffison (p506). Chart 1 pos. 20. Name uncertain." },
+
+  // Parents of Jean Pierre Majeaux (p508) — chart 1 positions 24 & 25 / charts 3 & 4
+  "p513": { id:"p513", first:"Francois Pierre", last:"Majeaux", gender:"M",
+            birth:{}, death:{}, chartRef:[3], notes:"Father of Jean Pierre Majeaux (p508). Chart 1 pos. 24; ancestry on chart 3." },
+  "p514": { id:"p514", first:"Francoise", last:"Prevost", gender:"F",
+            birth:{}, death:{}, chartRef:[1,4], notes:"Mother of Jean Pierre Majeaux (p508). Chart 1 pos. 25; ancestry continued on chart 4." },
+  "p519": { id:"p519", first:"Marie", last:"Sellier", gender:"F",
+            birth:{}, death:{}, chartRef:[3], notes:"Mother of Francois Pierre Majeaux (p513). Chart 3. Surname spelled 'Sellie' on chart." },
+
+  // Parents of Francoise Prevost (p514) — chart 4 (Ancestor Chart No. 5)
+  "p515": { id:"p515", first:"Nicolas", last:"Prevost", gender:"M",
+            birth:{}, death:{}, chartRef:[4], notes:"Father of Francoise Prevost (p514). Chart 4 pos. 2." },
+  "p516": { id:"p516", first:"Yve Dulie", last:"", gender:"F",
+            birth:{}, death:{}, chartRef:[4], notes:"Mother of Francoise Prevost (p514). Chart 4 pos. 3. Name very uncertain." },
+
+  // Bordelon grandparents (chart 1 positions 26 & 27 — grandparents of Narcisse Majeaux's unnamed mother p520)
+  "p521": { id:"p521", first:"Nicolas", last:"Bordelon", gender:"M",
+            birth:{}, death:{}, chartRef:[1], notes:"Chart 1 pos. 26. Father of unnamed Bordelon daughter (p520), who was mother of Narcisse Majeaux (p502)." },
+  "p522": { id:"p522", first:"Adrienne", last:"Bordelon", gender:"F",
+            birth:{}, death:{}, chartRef:[1], notes:"Chart 1 pos. 27. Mother of unnamed Bordelon daughter (p520)." },
+
+  // ── DEEP ANCESTRY — Clack / Hebert line ──────────────────────────────────
+  // Source: Pedigree Chart 2 (Ancestor Chart No. 3)
+  // Subject of chart 2 is Louise Clack (p015); Dave Clack's parents were blank on that chart.
+
+  // Parents of Mela Hebert (p004) — chart 2 positions 6 & 7
+  "p517": { id:"p517", first:"Flournoy", last:"Hebert", gender:"M",
+            birth:{}, death:{}, chartRef:[2], notes:"Father of Mela Hebert (p004). Chart 2 pos. 6." },
+  "p518": { id:"p518", first:"Tzellia", last:"Jeansonne", gender:"F",
+            birth:{}, death:{}, chartRef:[2], notes:"Mother of Mela Hebert (p004). Chart 2 pos. 7. Surname very uncertain." },
+
+  // ── CHART 5 — Bordeaux line (Ancestor Chart No. 6) ───────────────────────
+  // Connection to main tree not confirmed from available charts
+  "p523": { id:"p523", first:"Leon", last:"Bordeaux", gender:"M",
+            birth:{}, death:{}, chartRef:[5], notes:"Chart 5 subject. Bordeaux/Bordelon line. Exact connection to main tree not confirmed." },
+  "p524": { id:"p524", first:"Francoise", last:"Scup", gender:"F",
+            birth:{}, death:{}, chartRef:[5], notes:"Chart 5. Companion of Leon Bordeaux. Surname very uncertain." },
 };
 
 const FAMILIES = [
@@ -456,7 +573,7 @@ const FAMILIES = [
   { id:"f023", husbandId:"p036", wifeId:"p037",
     marriage:{},
     childIds:["p107","p111"], chartRef:11,
-    notes:"Aby Luther Barrett + Nora Lee Brown" },
+    notes:"Arby Luther Barrett + Nora Lee Brown" },
   { id:"f024", husbandId:"p039", wifeId:"p038", marriage:{},
     childIds:["p113","p114","p115","p116","p117"], chartRef:16,
     notes:"Dee Babin + Frances (Fannie) Golden" },
@@ -481,11 +598,11 @@ const FAMILIES = [
     childIds:["p210","p212","p214"], chartRef:6,
     notes:"Donald Paul Golden Sr. + Edith Elnora Barrett" },
   { id:"f034", husbandId:"p109", wifeId:"p108",
-    marriage:{date:"c.11/3/1946", place:"Kountze, TX"},
+    marriage:{date:"c.7/3/1942", place:"Kountze, TX"},
     childIds:["p216","p218","p125"], chartRef:10,
     notes:"Harold Nathan Morgan + Lois Inez Golden" },
   { id:"f035", husbandId:"p112", wifeId:"p111",
-    marriage:{date:"c.2/3/1963", place:"Beaumont, TX"},
+    marriage:{date:"3/17/1946", place:"Beaumont, TX"},
     childIds:["p226","p220","p222","p224"], chartRef:27,
     notes:"Gordon Evans Thomas + Helen Faye Barrett" },
 
@@ -538,7 +655,51 @@ const FAMILIES = [
     notes:"Steven Gregory Thomas + Gladys Ann Golden" },
   { id:"f052", husbandId:"p225", wifeId:"p224", marriage:{},
     childIds:["p325","p326"], chartRef:30,
-    notes:"Carlton David [?] + Patricia Ann Thomas" },
+    notes:"Carlton David Cherry + Patricia Ann Thomas" },
+
+  // ── DEEP ANCESTRY families (Johnson / Majeaux / Teffison / Bordelon / Hebert lines) ──
+  { id:"f070", husbandId:"p500", wifeId:"p501", marriage:{},
+    childIds:["p001"], chartRef:1,
+    notes:"Charles Johnson III + Helene Teffison — parents of Jean Johnson (p001)" },
+  { id:"f071", husbandId:"p502", wifeId:"p503", marriage:{},
+    childIds:["p002"], chartRef:1,
+    notes:"Narcisse Majeaux + Adelaide Firman — parents of Marceline Majeaux (p002)" },
+  { id:"f072", husbandId:"p504", marriage:{},
+    childIds:["p500"], chartRef:1,
+    notes:"Charles Johnson II — father of Charles Johnson III (p500); wife not recorded" },
+  { id:"f073", husbandId:"p506", wifeId:"p507", marriage:{},
+    childIds:["p501"], chartRef:1,
+    notes:"Hypolite Teffison + [Mariette] Majeaux — parents of Helene Teffison (p501)" },
+  { id:"f074", husbandId:"p508", wifeId:"p520", marriage:{},
+    childIds:["p502"], chartRef:1,
+    notes:"Jean Pierre Majeaux + [?] Bordelon — parents of Narcisse Majeaux (p502); mother's name not recorded on chart" },
+  { id:"f075", husbandId:"p509", wifeId:"p510", marriage:{},
+    childIds:["p503"], chartRef:1,
+    notes:"Joseph Firman + [Juliette] Troscuy — parents of Adelaide Firman (p503)" },
+  { id:"f076", husbandId:"p511", marriage:{},
+    childIds:["p504"], chartRef:1,
+    notes:"Charles Basseau Johnson — father of Charles Johnson II (p504); wife not recorded" },
+  { id:"f077", husbandId:"p512", marriage:{},
+    childIds:["p506"], chartRef:1,
+    notes:"[Tosa] Teffison — father of Hypolite Teffison (p506); wife not recorded" },
+  { id:"f078", husbandId:"p513", wifeId:"p514", marriage:{},
+    childIds:["p508"], chartRef:[1,3],
+    notes:"Francois Pierre Majeaux + Francoise Prevost — parents of Jean Pierre Majeaux (p508)" },
+  { id:"f079", husbandId:"p515", wifeId:"p516", marriage:{},
+    childIds:["p514"], chartRef:4,
+    notes:"Nicolas Prevost + [Uve Dulie?] — parents of Francoise Prevost (p514)" },
+  { id:"f080", wifeId:"p519", marriage:{},
+    childIds:["p513"], chartRef:3,
+    notes:"Marie Sellier — mother of Francois Pierre Majeaux (p513); father not recorded on chart 3" },
+  { id:"f081", husbandId:"p521", wifeId:"p522", marriage:{},
+    childIds:["p520"], chartRef:1,
+    notes:"Nicolas Bordelon + Adrienne Bordelon — parents of unnamed Bordelon daughter (p520, mother of Narcisse Majeaux)" },
+  { id:"f082", husbandId:"p517", wifeId:"p518", marriage:{},
+    childIds:["p004"], chartRef:2,
+    notes:"FlournoyHebert + Tzellia Jeansonne — parents of Mela Hebert (p004)" },
+  { id:"f083", husbandId:"p523", wifeId:"p524", marriage:{},
+    childIds:[], chartRef:5,
+    notes:"Leon Bordeaux + Francoise Scup — chart 5; exact connection to main tree unconfirmed" },
 
   // ── GEN 5 couples ────────────────────────────────────────────────────────
   { id:"f060", husbandId:"p301", wifeId:"p300",
@@ -551,8 +712,12 @@ const FAMILIES = [
     notes:"Thomas James Vaes Jr. + Vicky Layne Viguet" },
   { id:"f062", husbandId:"p310", wifeId:"p309",
     marriage:{date:"c.7/2/1988", place:"Nacogdoches, TX"},
-    childIds:["p404"], chartRef:39,
-    notes:"[?] Webb + Britany Carin Golden" },
+    childIds:["p404","p408","p409","p410","p411","p412","p413"], chartRef:39,
+    notes:"Glenn Webb + Britany Carin Golden" },
+  { id:"f063", husbandId:"p311", wifeId:"p405",
+    marriage:{},
+    childIds:["p406","p407"],
+    notes:"Patrick Scott Golden + Stefanie Garza" },
 ];
 
 // Build lookup: personId → family they belong to as a child
@@ -564,7 +729,7 @@ FAMILIES.forEach(f => {
 // Build lookup: personId → families they appear in as spouse
 const SPOUSE_FAMILIES = {};
 FAMILIES.forEach(f => {
-  [f.husbandId, f.wifeId].forEach(pid => {
+  [f.husbandId, f.wifeId].filter(Boolean).forEach(pid => {
     if (!SPOUSE_FAMILIES[pid]) SPOUSE_FAMILIES[pid] = [];
     SPOUSE_FAMILIES[pid].push(f.id);
   });
@@ -574,15 +739,15 @@ FAMILIES.forEach(f => {
 const CHART_INFO = {
   1:  { type:"pedigree", title:"Ancestor Chart No. 2 — Charles Johnson II line" },
   2:  { type:"pedigree", title:"Ancestor Chart No. 3 — Johnson line continued" },
-  3:  { type:"pedigree", title:"Ancestor Chart No. 4 — [Marie Sellie] line" },
-  4:  { type:"pedigree", title:"Ancestor Chart No. 5 — [DuBe / Devers] line" },
-  5:  { type:"pedigree", title:"Ancestor Chart No. 6 — [Francoise / Fontenot] line" },
+  3:  { type:"pedigree", title:"Ancestor Chart No. 4 — Majeaux line (Francois Pierre Majeaux + Marie Sellier)" },
+  4:  { type:"pedigree", title:"Ancestor Chart No. 5 — Prevost line (Nicolas Prevost)" },
+  5:  { type:"pedigree", title:"Ancestor Chart No. 6 — Bordeaux line (Leon Bordeaux)" },
   6:  { type:"family", title:"Donald Paul Golden Sr. + Edith Elnora Barrett" },
   7:  { type:"family", title:"Harold Lee Golden + Louis Madine Roberts" },
   8:  { type:"family", title:"Ernest Albert Golden + Marjorie Lee McVey" },
   9:  { type:"family", title:"Thedford Lay Hart + Hazel Ella Alice Golden" },
   10: { type:"family", title:"Harold Nathan Morgan + Lois Inez Golden" },
-  11: { type:"family", title:"Aby Luther Barrett + Nora Lee Brown" },
+  11: { type:"family", title:"Arby Luther Barrett + Nora Lee Brown" },
   12: { type:"family", title:"James Edward Golden + Beatrice Rebecca Banks" },
   13: { type:"family", title:"Henry Benson Barrett + Elizabeth Jane White" },
   14: { type:"family", title:"Albert Golden + Ella Littleton" },
@@ -601,7 +766,7 @@ const CHART_INFO = {
   27: { type:"family", title:"Gordon Evans Thomas + Helen Faye Barrett" },
   28: { type:"family", title:"Wayne Evans Thomas + Laurie Mariame Abercrombie" },
   29: { type:"family", title:"Steven Gregory Thomas + Gladys Ann Golden" },
-  30: { type:"family", title:"Carlton David [?] + Patricia Ann Thomas" },
+  30: { type:"family", title:"Carlton David Cherry + Patricia Ann Thomas" },
   31: { type:"family", title:"Gregory Bruce Golden + Almalee Davis Crumb" },
   32: { type:"family", title:"Michael Lee Golden + Christine Smith" },
   33: { type:"family", title:"Barry James Golden + Mary Lyna Lewery" },
@@ -610,5 +775,5 @@ const CHART_INFO = {
   36: { type:"family", title:"Robert Murray Brown + Barbara Sue Golden" },
   37: { type:"family", title:"Charles Jude Giglio + Kim Brown" },
   38: { type:"family", title:"Thomas James Vaes Jr. + Vicky Layne Viguet" },
-  39: { type:"family", title:"[?] Webb + Britany Carin Golden" },
+  39: { type:"family", title:"Glenn Webb + Britany Carin Golden" },
 };
