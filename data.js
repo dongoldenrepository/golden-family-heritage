@@ -189,7 +189,7 @@ const PEOPLE = {
             death:{date:"8/8/2018"}, chartRef:[11,27], notes:"Daughter of Aby Luther Barrett + Nora Lee Brown" },
   "p112": { id:"p112", first:"Gordon Evans", last:"Thomas", gender:"M",
             birth:{date:"12/5/1923", place:"[Fort Payne area, FL]"},
-            death:{},
+            death:{date:"1/12/2007"},
             marriage:{date:"3/17/1946", place:"Beaumont, TX (Jeff Co.)"},
             chartRef:[27], notes:"Church: Baptist. Father: [?] Stintons Sr." },
 
@@ -373,10 +373,21 @@ const PEOPLE = {
             death:{}, chartRef:[35],
             notes:"Daughter of Charles D. Landry + Rebecca Etha Morgan" },
   "p320": { id:"p320", first:"Tara Marie", last:"Thomas", gender:"F",
-            birth:{}, death:{}, chartRef:[28], notes:"Daughter of Wayne Evans Thomas + Laurie Mariame Abercrombie" },
+            birth:{date:"9/17/1980"},
+            death:{}, chartRef:[28], notes:"Daughter of Wayne Evans Thomas + Laurie Mariame Abercrombie" },
   "p321": { id:"p321", first:"Shane Allen", last:"Thomas", gender:"M",
-            birth:{date:"c.7/12/1982", place:"Beaumont, TX (Jeff Co.)"},
+            birth:{date:"8/1/1982", place:"Beaumont, TX (Jeff Co.)"},
             death:{}, chartRef:[28], notes:"Son of Wayne Evans Thomas + Laurie Mariame Abercrombie" },
+
+  // Tara Marie Thomas's family
+  "p525": { id:"p525", first:"Waymon Dean", last:"Triana", suffix:"Jr.", gender:"M",
+            birth:{}, death:{}, notes:"Husband of Tara Marie Thomas" },
+  "p526": { id:"p526", first:"Thomas Wayne", last:"Triana", gender:"M",
+            birth:{date:"2/26/2013"}, death:{}, notes:"Son of Waymon Dean Triana Jr. + Tara Marie Thomas" },
+
+  // Shane Allen Thomas's family
+  "p527": { id:"p527", first:"Ashley Elizabeth", last:"Leyendecker", gender:"F",
+            birth:{}, death:{}, notes:"Wife of Shane Allen Thomas" },
   "p322": { id:"p322", first:"William Barrett", last:"Thomas", gender:"M",
             birth:{date:"c.7/13/1971", place:"Beaumont, TX (Jeff Co.)"},
             death:{}, chartRef:[29], notes:"Son of Steven Gregory Thomas + Gladys Ann Golden" },
@@ -719,6 +730,18 @@ const FAMILIES = [
   { id:"f083", husbandId:"p523", wifeId:"p524", marriage:{},
     childIds:[], chartRef:5,
     notes:"Leon Bordeaux + Francoise Scup — chart 5; exact connection to main tree unconfirmed" },
+
+  // Tara Marie Thomas + Waymon Dean Triana Jr.
+  { id:"f084", husbandId:"p525", wifeId:"p320",
+    marriage:{date:"8/12/2002"},
+    childIds:["p526"],
+    notes:"Waymon Dean Triana Jr. + Tara Marie Thomas" },
+
+  // Shane Allen Thomas + Ashley Elizabeth Leyendecker
+  { id:"f085", husbandId:"p321", wifeId:"p527",
+    marriage:{date:"3/26/2022"},
+    childIds:[],
+    notes:"Shane Allen Thomas + Ashley Elizabeth Leyendecker" },
 
   // ── GEN 5 couples ────────────────────────────────────────────────────────
   { id:"f060", husbandId:"p301", wifeId:"p300",
